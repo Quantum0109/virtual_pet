@@ -28,24 +28,28 @@ class App(tk.Tk):
         self.energy_lbl = tk.Label(self, text=f"бодрость: {self.pet.energy}")
         self.energy_lbl.pack()
 
+
         self.canvas = tk.Canvas(self, width=256, height=256)
         self.canvas.pack()
-        self.img = tk.PhotoImage(file="asserts/calm.png")
+        self.img = tk.PhotoImage(file="assets/calm.png")
         self.img = self.img.subsample(2)
         self.canvas.create_image(128, 128, image=self.img, anchor=tk.CENTER)
 
-        self.feed_btn = tk.Button(self, text="покормить")
-        self.feed_btn.pack()
-        self.feed_btn = tk.Button(self, text="покормить")
+
+        self.feed_btn = tk.Button(self, text="покормить", command=lambda: self.pet.feed(5))
         self.feed_btn.pack()
 
     def my_update(self):
             self.pet.decrease_stats()
             self.fullness_lbl.config(text=f"сытость: {self.pet.fullness}")
-            time.sleep(1)
+            self.health_lbl.config(text=f"здоровье: {self.pet.health}")
+            self.mood_lbl.config(text=f"настроение: {self.pet.mood}")
+            self.cleanness_lbl.config(text=f"чистота: {self.pet.cleanness}")
+            self.energy_lbl.config(text=f"энергия: {self.pet.energy}")
             self.after(1000, self.my_update)
 
-                    
+
+
 
 if __name__ == '__main__':
     window = App()
